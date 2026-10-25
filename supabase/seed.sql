@@ -1,0 +1,435 @@
+-- =========================================================================
+-- Saathi: Supabase Seed Script for 18 Verified Indian Government Schemes
+-- =========================================================================
+
+INSERT INTO public.schemes (
+    id, name, category, description, eligibility_rules, required_documents, application_steps, official_url, deadline, where_to_get_documents
+) VALUES
+(
+    'pm-kisan',
+    'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+    'farmer',
+    'Provides ₹6,000 per year in three equal installments of ₹2,000 directly into the bank accounts of all landholding farmer families across India.',
+    '{"min_age": 18, "max_income": 1000000, "occupations": ["farmer", "small_farmer", "marginal_farmer", "agriculture"], "states": ["All"], "genders": ["all"], "max_land_acres": 5, "conditions_summary": "Must own cultivable agricultural land. Institutional landholders and high-bracket taxpayers are excluded."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card',
+        'Land Ownership Record (Khatauni / RoR / Pattadar Passbook)',
+        'Bank Account Passbook (Aadhaar-seeded & NPCI active)',
+        'Active Mobile Number linked with Aadhaar'
+    ],
+    ARRAY[
+        'Step 1: Open the official PM-KISAN portal (pmkisan.gov.in) or visit your nearest Common Service Centre (CSC) / MeeSeva centre.',
+        'Step 2: Click on "New Farmer Registration" and input your Aadhaar number and registered mobile number.',
+        'Step 3: Select your State, District, Sub-District, Block, and Village; enter land survey / Khatauni numbers.',
+        'Step 4: Upload scanned copy of land ownership record and enter Aadhaar-linked bank IFSC & account number.',
+        'Step 5: Submit application and complete e-KYC via OTP or biometric authentication at a CSC kiosk.'
+    ],
+    'https://pmkisan.gov.in',
+    'Ongoing (Tri-annual DBT cycle: April-July, Aug-Nov, Dec-Mar)',
+    '{"Aadhaar Card": "UIDAI portal or local Aadhaar Seva Kendra.", "Land Ownership Record": "State Land Records portal (e.g. Dharani, Bhulekh, MeeBhoomi) or VRO / Tehsildar office.", "Bank Account Passbook": "Bank branch (request NPCI Aadhaar seeding form).", "Active Mobile Number linked with Aadhaar": "Aadhaar Seva Kendra or authorized post office."}'::jsonb
+),
+(
+    'pm-kmy',
+    'Pradhan Mantri Kisan Maandhan Yojana (PM-KMY)',
+    'farmer',
+    'Government-backed pension scheme providing assured pension of ₹3,000 per month to small and marginal farmers upon turning 60 years of age.',
+    '{"min_age": 18, "max_age": 40, "occupations": ["farmer", "small_farmer", "marginal_farmer"], "states": ["All"], "genders": ["all"], "max_land_acres": 5, "conditions_summary": "Entry age between 18 and 40 years. Must possess cultivable land up to 2 hectares (5 acres)."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card',
+        'Savings Bank Account Passbook with IFSC',
+        'Pattadar Passbook or PM-KISAN Beneficiary ID',
+        'Nominee details (Aadhaar & relationship proof)'
+    ],
+    ARRAY[
+        'Step 1: Visit the nearest Common Service Centre (CSC) along with Aadhaar, bank passbook, and land proof.',
+        'Step 2: Village Level Entrepreneur (VLE) fills online enrollment form on maandhan.in.',
+        'Step 3: Monthly contribution (₹55 to ₹200 based on entry age) is auto-debited; central govt contributes an equal matching amount.',
+        'Step 4: Sign auto-debit mandate and verify details via OTP.',
+        'Step 5: Collect the laminated Kisan Pension Card with unique Pension Scheme Number.'
+    ],
+    'https://maandhan.in',
+    'Ongoing (Eligible until the day you turn 40)',
+    '{"Aadhaar Card": "UIDAI Centre or UIDAI official portal.", "Savings Bank Account Passbook with IFSC": "Bank or Post Office branch where account is held.", "Pattadar Passbook or PM-KISAN Beneficiary ID": "Revenue Department, VRO office, or PM-KISAN receipt portal."}'::jsonb
+),
+(
+    'pmfby',
+    'Pradhan Mantri Fasal Bima Yojana (PMFBY)',
+    'farmer',
+    'Comprehensive financial cushion & insurance against non-preventable natural risks (drought, flood, unseasonal rain, pest attacks) for notified crops.',
+    '{"min_age": 18, "occupations": ["farmer", "sharecropper", "tenant_farmer", "agriculture"], "states": ["All"], "genders": ["all"], "conditions_summary": "Must grow notified food, oilseed, or commercial crops in designated notified districts/blocks."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card',
+        'Land Possession Certificate (LPC) or Land Title Deed',
+        'Crop Sowing Certificate issued by Patwari / Agriculture Officer',
+        'Bank Account Passbook (cancelled cheque)',
+        'Tenant / Sharecropper agreement (if applicable)'
+    ],
+    ARRAY[
+        'Step 1: Open pmfby.gov.in or download the Crop Insurance Mobile App or approach your bank/CSC.',
+        'Step 2: Select farmer registration and select your crop season (Kharif or Rabi) and scheme year.',
+        'Step 3: Enter land survey numbers, cultivated area (acres/hectares), and crop sown.',
+        'Step 4: Pay nominal subsidized premium (1.5% for Rabi, 2% for Kharif, 5% for commercial/horticultural crops).',
+        'Step 5: Retain the insurance policy certificate and application reference ID for crop loss intimation.'
+    ],
+    'https://pmfby.gov.in',
+    'Annual Cycle: Kharif cutoff July 31 | Rabi cutoff December 31',
+    '{"Land Possession Certificate (LPC)": "Tehsildar office / Block Development Officer.", "Crop Sowing Certificate": "Village Agriculture Extension Officer (AEO) or Village Revenue Officer.", "Aadhaar Card": "UIDAI portal or nearest Aadhaar centre."}'::jsonb
+),
+(
+    'nmmss',
+    'National Means-cum-Merit Scholarship Scheme (NMMSS)',
+    'student',
+    'Provides ₹12,000 per year (₹1,000/month) to meritorious students from economically weaker sections studying in classes 9 to 12 in government or government-aided schools.',
+    '{"min_age": 13, "max_age": 18, "max_income": 350000, "occupations": ["student"], "education_level": ["8th_pass", "9th_class", "10th_class", "11th_class", "12th_class"], "states": ["All"], "genders": ["all"], "conditions_summary": "Must clear NMMS selection test in Class 8. Family annual income must not exceed ₹3,50,000. Must study in Govt / local body / govt-aided school."}'::jsonb,
+    ARRAY[
+        'NMMS Selection Exam Scorecard / Roll Number',
+        'Class 8 / 9 / 10 Marksheet showing minimum 55% marks (50% for SC/ST)',
+        'Competent Authority Family Income Certificate',
+        'Student Savings Bank Account Passbook (joint or single)',
+        'Bonafide Student Certificate signed by School Principal',
+        'Aadhaar Card of student'
+    ],
+    ARRAY[
+        'Step 1: Register on the National Scholarship Portal (scholarships.gov.in) with student OTR (One Time Registration).',
+        'Step 2: Complete face/biometric authentication via NSP Mobile App.',
+        'Step 3: Choose Department of School Education and Literacy -> National Means-cum-Merit Scholarship.',
+        'Step 4: Enter marks, family income, school UDISE+ code, and bank details.',
+        'Step 5: Submit form and notify school Nodal Officer for Level-1 institute verification.'
+    ],
+    'https://scholarships.gov.in',
+    'Annual Academic Cycle: Applications open July, close November 30',
+    '{"Family Income Certificate": "MeeSeva / CSC / Tehsildar / SDM office.", "School Bonafide Certificate": "School Administrative Office / Headmaster.", "NMMS Exam Scorecard": "State Council of Educational Research and Training (SCERT) examination portal."}'::jsonb
+),
+(
+    'post-matric-sc-st',
+    'Post Matric Scholarship for SC & ST Students',
+    'student',
+    'Comprehensive financial assistance covering compulsory non-refundable university fees plus monthly maintenance allowance for SC/ST students in Class 11, 12, ITI, Degree, PG, and Professional courses.',
+    '{"min_age": 15, "max_age": 35, "max_income": 250000, "occupations": ["student"], "caste_categories": ["SC", "ST"], "education_level": ["10th_pass", "11th_class", "12th_class", "undergraduate", "postgraduate", "diploma"], "states": ["All"], "genders": ["all"], "conditions_summary": "Belong to Scheduled Caste (SC) or Scheduled Tribe (ST). Total family income from all sources must not exceed ₹2,50,000 per annum."}'::jsonb,
+    ARRAY[
+        'Permanent Community / Caste Certificate (issued by Revenue Division / Tehsildar)',
+        'Current Year Income Certificate',
+        '10th / 12th / Previous semester Marksheet',
+        'College Admission Fee Receipt & Bonafide Certificate',
+        'Aadhaar-seeded Bank Account Passbook'
+    ],
+    ARRAY[
+        'Step 1: Visit State Welfare / ePASS Portal (e.g. telanganaepass.cgg.gov.in, ssp.postmatric.karnataka.gov.in) or NSP (scholarships.gov.in).',
+        'Step 2: Select "Post Matric Scholarship Registration" and enter SSC Hall Ticket & Aadhaar details.',
+        'Step 3: Enter CET rank / Admission quota details, college name, and course code.',
+        'Step 4: Upload scanned caste certificate, income proof, and marksheets.',
+        'Step 5: Submit application and submit hardcopy verification set to college scholarship clerk.'
+    ],
+    'https://scholarships.gov.in',
+    'Annual Academic Cycle: Closes October 31 (Extended windows till Dec 15)',
+    '{"Caste Certificate": "MeeSeva / CSC portal or local Tehsildar Revenue Office.", "Income Certificate": "Tehsildar / Revenue Mandal Officer (renewed annually).", "College Admission Fee Receipt": "College Accounts / Admissions Section."}'::jsonb
+),
+(
+    'csss-higher-edu',
+    'Central Sector Scheme of Scholarship for College and University Students',
+    'student',
+    'Direct scholarship of ₹12,000/year for first 3 years of undergraduate study and ₹20,000/year for postgraduate study for students scoring above the 80th percentile in Class 12 board examinations.',
+    '{"min_age": 17, "max_age": 25, "max_income": 450000, "occupations": ["student"], "education_level": ["12th_pass", "undergraduate", "postgraduate"], "states": ["All"], "genders": ["all"], "conditions_summary": "Score above 80th percentile in relevant stream in Class 12 Board exam. Annual parental income ≤ ₹4,50,000. Pursuing regular degree."}'::jsonb,
+    ARRAY[
+        'Class 12 Board Examination Marksheet & Certificate',
+        'Parental Income Certificate',
+        'College Bonafide Certificate / Student ID Card',
+        'Aadhaar Card linked Bank Account details'
+    ],
+    ARRAY[
+        'Step 1: Check your board eligibility percentile on state board result notice.',
+        'Step 2: Login to National Scholarship Portal (scholarships.gov.in) and choose Department of Higher Education.',
+        'Step 3: Select "Central Sector Scheme for College and University Students".',
+        'Step 4: Input Class 12 roll number, board name, year of passing, and present degree details.',
+        'Step 5: Submit for online institutional verification by the Principal/Dean.'
+    ],
+    'https://scholarships.gov.in',
+    'Annual Cycle: Closes December 31',
+    '{"Class 12 Marksheet": "State Intermediate Board / CBSE / CISCE portal.", "Income Certificate": "Revenue Department / District Magistrate office.", "College Bonafide Certificate": "College Registrar or Student Affairs desk."}'::jsonb
+),
+(
+    'pm-yasasvi',
+    'PM-YASASVI (Young Achievers Scholarship Award Scheme for Vibrant India)',
+    'student',
+    'Provides top-class school education scholarships up to ₹75,000/year for Class 9-10 and ₹1,25,000/year for Class 11-12 to OBC, EBC, and DNT students.',
+    '{"min_age": 13, "max_age": 19, "max_income": 250000, "occupations": ["student"], "caste_categories": ["OBC", "EBC", "DNT"], "education_level": ["8th_pass", "9th_class", "10th_class", "11th_class"], "states": ["All"], "genders": ["all"], "conditions_summary": "OBC, EBC or De-notified, Nomadic and Semi-Nomadic Tribes (DNT) students enrolled in identified top schools. Income ≤ ₹2.5 Lakh/yr."}'::jsonb,
+    ARRAY[
+        'OBC / EBC / DNT Category Certificate',
+        'Income Certificate of Parents / Guardian',
+        'Previous Academic Year Passing Marksheet',
+        'Aadhaar Card of student',
+        'Identified Top-Class School Admission Certificate'
+    ],
+    ARRAY[
+        'Step 1: Check if your school is in the PM-YASASVI empaneled top school list on scholarships.gov.in.',
+        'Step 2: Submit application on National Scholarship Portal.',
+        'Step 3: Upload OBC/EBC category certificate and annual income certificate.',
+        'Step 4: School verifies the student enrollment and marks.',
+        'Step 5: Scholarship is disbursed directly to student Aadhaar-seeded account.'
+    ],
+    'https://yet.nta.ac.in',
+    'Annual Cycle: Closes September 30',
+    '{"OBC / EBC Certificate": "Tehsildar / MeeSeva / CSC centre.", "Income Certificate": "District Revenue Administration.", "School Admission Certificate": "School Headmaster or Principal office."}'::jsonb
+),
+(
+    'sukanya-samriddhi',
+    'Sukanya Samriddhi Yojana (SSY)',
+    'women',
+    'Government small-savings scheme for girl children offering an attractive tax-free 8.2% annual interest rate, partial withdrawal for higher education at 18, and full maturity upon turning 21.',
+    '{"max_age": 10, "occupations": ["any"], "genders": ["female"], "states": ["All"], "conditions_summary": "Applicable for girl child from birth up to 10 years of age. Maximum 2 girl children per family (triplets/twins exception allowed)."}'::jsonb,
+    ARRAY[
+        'Birth Certificate of the Girl Child (mentioning child name)',
+        'Aadhaar Card and PAN Card of Parent / Legal Guardian',
+        'Address Proof (Electricity bill / Ration card / Voter ID)',
+        'Passport size photographs of Parent and Child'
+    ],
+    ARRAY[
+        'Step 1: Visit any Indian Post Office branch or authorized commercial bank (SBI, PNB, Canara, BoB, etc.).',
+        'Step 2: Fill out the Sukanya Samriddhi Account Opening Form (Form-1).',
+        'Step 3: Attach child birth certificate and guardian Aadhaar/PAN copy.',
+        'Step 4: Deposit initial opening amount (minimum ₹250; maximum ₹1.5 Lakh per financial year).',
+        'Step 5: Receive your physical SSY passbook stamped with account number.'
+    ],
+    'https://www.indiapost.gov.in',
+    'Ongoing (Can be opened anytime before the girl turns 10)',
+    '{"Birth Certificate of Girl Child": "Municipal Corporation / Gram Panchayat / Registrar of Births & Deaths.", "Guardian Aadhaar / PAN": "UIDAI portal / NSDL e-Gov PAN portal.", "Address Proof": "Local electricity board, municipal body, or postal address certificate."}'::jsonb
+),
+(
+    'pmmvy',
+    'Pradhan Mantri Matru Vandana Yojana (PMMVY 2.0)',
+    'women',
+    'Direct cash incentive of ₹5,000 for the first child (in 2 installments) and ₹6,000 for second child if girl child, to compensate for wage loss and promote institutional nutrition and vaccination.',
+    '{"min_age": 19, "max_income": 800000, "occupations": ["any"], "genders": ["female"], "states": ["All"], "conditions_summary": "Pregnant women and lactating mothers who are not in regular Central or State Govt or PSU employment. Belongs to SC/ST, EWS, or BPL."}'::jsonb,
+    ARRAY[
+        'Mother and Child Protection (MCP) Card with registered LMP & ANC dates',
+        'Aadhaar Card of Mother (mandatory)',
+        'Husband / Father Aadhaar Card',
+        'Mother Aadhaar-seeded Bank / Post Office Account passbook',
+        'Eligibility proof (EWS certificate, BPL ration card, or MGNREGA job card)'
+    ],
+    ARRAY[
+        'Step 1: Register pregnancy within 570 days of Last Menstrual Period (LMP) at local Anganwadi Centre (AWC) or Govt Health Centre.',
+        'Step 2: Collect and fill PMMVY Form 1A with Anganwadi Worker (AWW) / ASHA.',
+        'Step 3: Complete at least one Antenatal Checkup (ANC) for 1st installment of ₹3,000.',
+        'Step 4: After child birth registration and initial vaccinations (BCG, OPV, DPT, Hepatitis B), fill Form 1B for 2nd installment of ₹2,000.',
+        'Step 5: Amount directly credited into mother bank account via DBT.'
+    ],
+    'https://pmmvy.wcd.gov.in',
+    'Ongoing (Apply within 570 days of LMP at Anganwadi)',
+    '{"MCP Card": "Anganwadi Worker (AWW) or primary health sub-centre.", "Aadhaar Card": "UIDAI centre.", "EWS / BPL Ration Card": "Food and Civil Supplies Department / MeeSeva."}'::jsonb
+),
+(
+    'janani-suraksha',
+    'Janani Suraksha Yojana (JSY)',
+    'women',
+    'Safe motherhood intervention under National Health Mission giving direct cash assistance (₹1,400 in rural areas, ₹1,000 in urban areas) for institutional deliveries in government health facilities.',
+    '{"min_age": 19, "occupations": ["any"], "genders": ["female"], "states": ["All"], "conditions_summary": "Pregnant women delivering at public health centres, sub-centres, primary health centres, or accredited private nursing homes."}'::jsonb,
+    ARRAY[
+        'BPL / Antyodaya Ration Card or SC/ST Certificate',
+        'Mother and Child Protection (MCP) Card',
+        'Aadhaar Card of the mother',
+        'Bank Account Passbook of the mother'
+    ],
+    ARRAY[
+        'Step 1: Contact village ASHA worker during pregnancy to prepare institutional birth plan.',
+        'Step 2: Attend government Primary Health Centre (PHC) / Community Health Centre (CHC) for labor and delivery.',
+        'Step 3: Institutional staff records birth in hospital register.',
+        'Step 4: Cash assistance is sanctioned and disbursed before discharge from hospital or via DBT.'
+    ],
+    'https://nhm.gov.in',
+    'Ongoing (Avail at the time of delivery at government hospital)',
+    '{"MCP Card": "ASHA / ANM worker at local Anganwadi.", "BPL Ration Card": "Civil Supplies Department.", "Bank Account Passbook": "Local bank branch."}'::jsonb
+),
+(
+    'pm-ujjwala',
+    'Pradhan Mantri Ujjwala Yojana 2.0 (PMUY)',
+    'women',
+    'Deposit-free LPG cylinder connection along with free first refill and free hotplate (gas stove) to adult women from poor and marginalized families.',
+    '{"min_age": 18, "occupations": ["any"], "genders": ["female"], "states": ["All"], "conditions_summary": "Adult woman belonging to poor household (SC, ST, PMAY beneficiary, AAY Antyodaya, Most Backward Classes, or 14-point declaration). No existing LPG connection in family."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card of applicant woman as Proof of Identity & Address',
+        'Ration Card issued by State Govt showing family composition (or self-declaration for migrants)',
+        'Aadhaar cards of all adult family members residing in household',
+        'Bank Account Passbook / Cancelled Cheque (IFSC & Account number)'
+    ],
+    ARRAY[
+        'Step 1: Visit pmuy.gov.in or approach nearest LPG dealer (Indane, Bharat Gas, or HP Gas).',
+        'Step 2: Submit Ujjwala 2.0 application form along with ration card and Aadhaar copies.',
+        'Step 3: Biometric e-KYC authentication of the woman applicant.',
+        'Step 4: Oil Marketing Company (OMC) verifies that no existing connection is linked with household members.',
+        'Step 5: LPG cylinder, regulator, safety hose, and 2-burner stove delivered free of cost.'
+    ],
+    'https://pmuy.gov.in',
+    'Ongoing enrollment across all districts',
+    '{"Ration Card": "Food, Civil Supplies & Consumer Affairs Department.", "Aadhaar Cards of Family": "UIDAI portal / Aadhaar Enrolment Centre.", "Bank Passbook": "Bank branch."}'::jsonb
+),
+(
+    'stand-up-india',
+    'Stand-Up India Scheme for Women & SC/ST Entrepreneurs',
+    'women',
+    'Facilitates bank loans between ₹10 Lakhs and ₹1 Crore to at least one Woman borrower and one SC/ST borrower per commercial bank branch for setting up greenfield enterprises in manufacturing, services, or trading.',
+    '{"min_age": 18, "occupations": ["entrepreneur", "business", "self_employed", "any"], "genders": ["female"], "states": ["All"], "conditions_summary": "For greenfield projects (first-time venture) in manufacturing, services, trading, or agri-allied sector. In non-individual enterprise, woman must hold 51%+ shareholding."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card and PAN Card of Woman Promoter',
+        'Detailed Project Report (DPR) with estimated costs & viability',
+        'Udyam Registration Certificate (MSME)',
+        'Bank statements of past 6 months (if applicable)',
+        'Proof of business premise lease / ownership and machinery quotes'
+    ],
+    ARRAY[
+        'Step 1: Register on the Stand-Up Mitra portal (standupmitra.in).',
+        'Step 2: Choose your category as "Woman Entrepreneur" and select your enterprise domain.',
+        'Step 3: Connect with handholding agencies (SIDBI, NABARD, DIC) if DPR assistance is required.',
+        'Step 4: Submit formal loan application to preferred Scheduled Commercial Bank branch.',
+        'Step 5: Bank appraises project and sanctions composite term loan and working capital credit.'
+    ],
+    'https://www.standupmitra.in',
+    'Ongoing under Ministry of Finance & SIDBI',
+    '{"Udyam Registration": "Udyam portal (udyamregistration.gov.in) with Aadhaar & PAN.", "Project Report (DPR)": "District Industries Centre (DIC) or Chartered Accountant.", "PAN Card": "Income Tax e-Filing portal / NSDL."}'::jsonb
+),
+(
+    'ignoaps-pension',
+    'Indira Gandhi National Old Age Pension Scheme (IGNOAPS)',
+    'senior',
+    'Monthly social security financial pension for elderly citizens from Below Poverty Line (BPL) families (₹200 to ₹500 Central share + State top-up granting up to ₹1,000 to ₹3,000/month depending on state).',
+    '{"min_age": 60, "occupations": ["senior_citizen", "retired", "unemployed", "daily_wage", "any"], "states": ["All"], "genders": ["all"], "conditions_summary": "Must be 60 years of age or older. Beneficiary family must be categorized Below Poverty Line (BPL) according to official government criteria."}'::jsonb,
+    ARRAY[
+        'Proof of Age (Aadhaar Card, Voter ID, or Medical Officer Age Certificate)',
+        'BPL Ration Card or BPL Certificate issued by Panchayat / Municipality',
+        'Bank / Post Office Passbook linked to Aadhaar (single account)',
+        'Passport size photographs and residential certificate'
+    ],
+    ARRAY[
+        'Step 1: Obtain application form from Gram Panchayat / Block Development Office (BDO) / Municipal Office or MeeSeva.',
+        'Step 2: Attach age proof, BPL card, and bank account details.',
+        'Step 3: Verification carried out by Village Revenue Officer (VRO) or Social Welfare Officer.',
+        'Step 4: Tehsildar / Sub-Collector issues sanction order.',
+        'Step 5: Pension amount is credited every month directly to beneficiary bank/post office account.'
+    ],
+    'https://nsap.nic.in',
+    'Ongoing enrollment (No deadline)',
+    '{"BPL Certificate / Ration Card": "District Civil Supplies Office or Block Development Office.", "Age Proof": "UIDAI / Election Commission Voter ID / Civil Hospital CMO.", "Bank Passbook": "Local bank or India Post Payments Bank (IPPB)."}'::jsonb
+),
+(
+    'rashtriya-vayoshri',
+    'Rashtriya Vayoshri Yojana (RVY)',
+    'senior',
+    'Provides free assisted living devices and physical aids (wheelchairs, tri-cycles, walking sticks, crutches, hearing aids, spectacles, artificial dentures) to senior citizens with age-related infirmities.',
+    '{"min_age": 60, "max_income": 180000, "occupations": ["senior_citizen", "retired", "any"], "states": ["All"], "genders": ["all"], "conditions_summary": "Senior citizen aged 60+ suffering from age-related disability. Family monthly income must be less than ₹15,000 or possess BPL ration card."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card or Photo Voter ID Card',
+        'Proof of Age showing 60+ years',
+        'BPL Card or Income Certificate (monthly income < ₹15,000)',
+        'Disability / Medical assessment certificate from Government Doctor'
+    ],
+    ARRAY[
+        'Step 1: District Social Welfare Department and ALIMCO organize assessment camps at district / taluk level.',
+        'Step 2: Senior citizens attend camp for free medical screening and device measurement by ALIMCO prosthetic specialists.',
+        'Step 3: Beneficiary registration slip issued.',
+        'Step 4: Customized assistive devices and appliances distributed free of charge at district distribution function.'
+    ],
+    'https://alimco.in',
+    'Ongoing (Camp-based district schedule advertised locally)',
+    '{"Medical Certificate": "Government Civil Hospital / CHC Doctor.", "Income Certificate": "Tehsildar / Revenue Department.", "Aadhaar Card": "UIDAI centre."}'::jsonb
+),
+(
+    'atal-pension',
+    'Atal Pension Yojana (APY)',
+    'senior',
+    'Guaranteed pension scheme for unorganized sector workers delivering fixed monthly pensions of ₹1,000, ₹2,000, ₹3,000, ₹4,000, or ₹5,000 from age 60 onwards, with spouse continuation and nominee refund.',
+    '{"min_age": 18, "max_age": 40, "occupations": ["informal_worker", "daily_wage", "small_business", "driver", "domestic_worker", "farmer", "any"], "states": ["All"], "genders": ["all"], "conditions_summary": "Indian citizen between 18 and 40 years. Must possess savings bank account. Applicant must not be an income taxpayer."}'::jsonb,
+    ARRAY[
+        'Savings Bank Account or Post Office Account details with IFSC',
+        'Aadhaar Card',
+        'Active Mobile number for auto-debit and PRAN alerts',
+        'Spouse and Nominee Aadhaar details'
+    ],
+    ARRAY[
+        'Step 1: Approach the bank branch or post office where your savings bank account is maintained.',
+        'Step 2: Fill the APY Subscriber Registration Form and choose desired pension amount (e.g. ₹3,000 or ₹5,000/month).',
+        'Step 3: Provide auto-debit consent for monthly, quarterly, or half-yearly contribution deductions.',
+        'Step 4: Receive confirmation SMS with Permanent Retirement Account Number (PRAN).',
+        'Step 5: Download APY e-PRAN card from Protean CRA portal (npscra.nsdl.co.in).'
+    ],
+    'https://www.npscra.nsdl.co.in',
+    'Ongoing enrollment (Must subscribe between ages 18 and 40)',
+    '{"Savings Bank Account": "Any Commercial Bank, Regional Rural Bank, or India Post branch.", "Aadhaar Card": "UIDAI Centre."}'::jsonb
+),
+(
+    'ab-pmjay',
+    'Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)',
+    'health',
+    'World largest cashless health assurance scheme offering ₹5,00,000 per family per year for secondary and tertiary hospitalization across 29,000+ empaneled public & private hospitals. Senior citizens aged 70+ also get separate ₹5 Lakh cover.',
+    '{"min_age": 0, "occupations": ["any"], "states": ["All"], "genders": ["all"], "conditions_summary": "Families eligible under SECC 2011 deprivation criteria, RSBY cardholders, expanded state registries, and ALL senior citizens aged 70 years and above irrespective of income."}'::jsonb,
+    ARRAY[
+        'Aadhaar Card of all family members',
+        'Ration Card / Family Head ID / PMJAY Family Letter',
+        'Active Mobile Number for e-KYC OTP verification'
+    ],
+    ARRAY[
+        'Step 1: Visit beneficiary.nha.gov.in or download the "Ayushman App" on smartphone.',
+        'Step 2: Log in using mobile OTP as "Beneficiary" and select State, District, and Search by Aadhaar number / Family ID.',
+        'Step 3: If status shows "Identified / Uncarded", initiate e-KYC using Aadhaar OTP or facial recognition.',
+        'Step 4: Upload live selfie photo and submit KYC.',
+        'Step 5: Download instant PVC-ready Ayushman Card; present at any empaneled hospital Arogya Mitra desk for cashless care.'
+    ],
+    'https://beneficiary.nha.gov.in',
+    'Ongoing (Card creation and treatment available 24x7x365)',
+    '{"Aadhaar Card": "UIDAI enrolment centre / UIDAI website.", "Ration Card / Family ID": "State Food and Consumer Affairs Department.", "Ayushman Card": "Downloaded instantly from beneficiary.nha.gov.in or nearest CSC/hospital."}'::jsonb
+),
+(
+    'pmsma',
+    'Pradhan Mantri Surakshit Matritva Abhiyan (PMSMA)',
+    'health',
+    'Guaranteed, comprehensive, and quality antenatal care (ANC) including free specialist consultations, ultrasound, blood tests, and iron-folic supplements to pregnant women on the 9th of every month.',
+    '{"min_age": 18, "occupations": ["any"], "genders": ["female"], "states": ["All"], "conditions_summary": "All pregnant women in their 2nd or 3rd trimester (after 12 weeks of pregnancy) across all states and union territories."}'::jsonb,
+    ARRAY[
+        'Mother and Child Protection (MCP) Card',
+        'Aadhaar Card or Government Photo Identity Card',
+        'Past medical records, blood test slips, and earlier sonography scans (if any)'
+    ],
+    ARRAY[
+        'Step 1: On the 9th of any month, visit your nearest Community Health Centre (CHC), Sub-District Hospital, or District Civil Hospital.',
+        'Step 2: Register at the PMSMA special counter with your MCP Card.',
+        'Step 3: Undergo clinical checkup: BP, weight, hemoglobin, blood glucose, and ultrasound scan by visiting OB/GYN doctors.',
+        'Step 4: Receive green sticker on MCP card if normal pregnancy, or red sticker if High-Risk Pregnancy (HRP) for special care.',
+        'Step 5: Collect free iron-folic acid, calcium tablets, and personalized dietary roadmap.'
+    ],
+    'https://pmsma.nhp.gov.in',
+    '9th of every month (Recurring national clinical drive)',
+    '{"MCP Card": "Local Primary Health Centre (PHC) or Anganwadi worker.", "Aadhaar Card": "UIDAI portal."}'::jsonb
+),
+(
+    'pmay-g',
+    'Pradhan Mantri Awas Yojana - Gramin (PMAY-G)',
+    'health',
+    'Provides direct financial assistance of ₹1,20,000 (plain areas) and ₹1,30,000 (hilly/difficult states) plus ₹12,000 toilet grant and 90 days MGNREGA wages to rural families without pucca houses.',
+    '{"min_age": 18, "occupations": ["rural_household", "daily_wage", "farmer", "artisan", "any"], "states": ["All"], "genders": ["all"], "conditions_summary": "Rural households living in kutcha / dilapidated houses or houseless families verified through SECC 2011 and Awas+ surveys and approved by Gram Sabha."}'::jsonb,
+    ARRAY[
+        'Aadhaar Cards of all adult family members',
+        'MGNREGA Registered Job Card Number',
+        'Aadhaar-linked Savings Bank Account Passbook',
+        'Land Possession Certificate or Gram Panchayat No-Objection Certificate (NOC)'
+    ],
+    ARRAY[
+        'Step 1: Check your family presence on the Gram Panchayat Awas+ verified priority list.',
+        'Step 2: Village Officer / Gram Rozgar Sahayak captures geotagged photographs of current kutcha house site using AwaasApp.',
+        'Step 3: Block Development Officer (BDO) issues official housing sanction order.',
+        'Step 4: 1st installment released for foundation; 2nd installment for plinth level; 3rd installment upon roof casting.',
+        'Step 5: Upload completion geotag photo; receive toilet construction grant under Swachh Bharat Mission.'
+    ],
+    'https://pmayg.nic.in',
+    'Ongoing rollout under extended Awas+ rural housing mission',
+    '{"MGNREGA Job Card": "Gram Panchayat office / Program Officer.", "Land Possession Certificate / NOC": "Village Revenue Officer (VRO) / Gram Panchayat Sarpanch.", "Bank Passbook": "Local bank or Gramin Bank branch."}'::jsonb
+)
+ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    category = EXCLUDED.category,
+    description = EXCLUDED.description,
+    eligibility_rules = EXCLUDED.eligibility_rules,
+    required_documents = EXCLUDED.required_documents,
+    application_steps = EXCLUDED.application_steps,
+    official_url = EXCLUDED.official_url,
+    deadline = EXCLUDED.deadline,
+    where_to_get_documents = EXCLUDED.where_to_get_documents,
+    updated_at = timezone('utc'::text, now());
