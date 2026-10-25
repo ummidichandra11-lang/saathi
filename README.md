@@ -1,6 +1,10 @@
 # Saathi (साथी / సాథి) 🇮🇳
 ### Voice-First, Multilingual AI Assistant for Indian Government Welfare Schemes
 
+[![Live Demo on Vercel](https://img.shields.io/badge/Live_Deployment-Vercel-black?style=for-the-badge&logo=vercel)](https://saathi.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/ummidichandra11-lang/saathi)
+
+> **Live Web App:** [https://saathi.vercel.app](https://saathi.vercel.app)  
 > **Empowering 1.4 Billion Citizens**: Discover eligible scholarships, pensions, farmer subsidies, and health schemes by speaking freely in **English, हिन्दी (Hindi), or తెలుగు (Telugu)**. Receive instant document roadmaps, where to obtain each paper, and privacy-first document verification.
 
 ---
